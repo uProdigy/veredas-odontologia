@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Modelo de site para clínica odontológica: tratamentos, preços e agendamento pelo WhatsApp.">
+<meta property="og:title" content="Veredas Odontologia">
+<meta property="og:description" content="Modelo de site para clínica odontológica: tratamentos, preços e agendamento pelo WhatsApp.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Veredas Odontologia</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: cabeçalho fixo, abertura em duas colunas com um arco no lugar da foto,
+   tratamentos como cardápio de spa (linhas, não cartões), faixa escura para o passo a passo,
+   contato com horários em tabela. Visual único e claro, de propósito. */
+:root{
+  /*TOKENS-START*/
+  --bg:#F1F6F5; --surface:#FFFFFF; --ink:#0F2A33; --muted:#51676E; --line:#D7E3E2;
+  --accent:#0B7A75; --accent-deep:#075E5A; --on-accent:#FFFFFF;
+  --soft:#DCEBE8; --second:#F3E3C8; --band:#0F2A33; --on-band:#F1F6F5; --on-band-muted:#AFC3C6;
+  --g1:#BFE6DE; --g2:#F3E3C8; --g3:#D6ECEA; --g4:#9CCFC9;
+  /*TOKENS-END*/
+  --display:"Fraunces", "Iowan Old Style", Georgia, serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --r:18px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,4.2vw,3rem)}
+h2 em,h1 em{font-style:italic;color:var(--accent)}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font:600 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* aviso de demonstração */
+.demo{background:var(--band);color:var(--on-band-muted);font-size:.82rem;text-align:center}
+.demo .wrap{padding-block:7px}
+.demo b{color:var(--on-band);font-weight:600}
+
+/* cabeçalho */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
+.logo{font:500 1.35rem/1 var(--display);text-decoration:none;display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.logo small{font:600 .68rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;gap:26px;margin-left:auto;font-size:.95rem;font-weight:500}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;font:600 1rem/1 var(--body);padding:15px 22px;border-radius:999px;text-decoration:none;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-main{background:var(--accent);color:var(--on-accent)}
+.btn-main:hover{background:var(--accent-deep)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-sm{padding:11px 18px;font-size:.92rem}
+.wa{width:18px;height:18px;flex:none}
+
+/* abertura */
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:64px 72px}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.6rem);margin-block:18px 20px}
+.hero .lead{font-size:1.15rem;color:var(--muted);max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 22px;margin:34px 0 0;padding:0;list-style:none;font-size:.93rem;color:var(--muted)}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.art{position:relative;justify-self:center;width:min(100%,420px)}
+.arch{aspect-ratio:4/5;max-width:100%;border-radius:999px 999px var(--r) var(--r);overflow:hidden;position:relative;
+  background:radial-gradient(120% 80% at 25% 18%,var(--g1),transparent 60%),radial-gradient(90% 70% at 85% 75%,var(--g2),transparent 65%),linear-gradient(160deg,var(--g3),var(--g4))}
+.arch svg{position:absolute;inset:auto 0 0 0;width:100%;height:auto;opacity:.55}
+.arch .slot{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font:500 .8rem/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.5;text-align:center}
+.chip{position:absolute;background:var(--surface);border-radius:14px;padding:12px 16px;box-shadow:0 14px 34px -14px color-mix(in srgb,var(--ink) 45%,transparent);font-size:.86rem;line-height:1.35}
+.chip b{display:block;font:500 1.15rem/1.2 var(--display)}
+.chip span{color:var(--muted)}
+.chip-a{left:-22px;bottom:16%}
+.chip-b{right:-14px;top:14%}
+.stars{color:var(--accent);letter-spacing:2px;font-size:.8rem}
+
+/* tratamentos */
+section{scroll-margin-top:84px}
+.treat .wrap{padding-block:72px}
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px 40px;margin-bottom:30px}
+.head p{color:var(--muted);max-width:30em}
+.head h2{margin-top:12px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.tab{border:0;cursor:pointer;font:600 .92rem/1 var(--body);padding:11px 18px;border-radius:999px;background:var(--soft);color:var(--ink)}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.menu{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;margin:0;padding:0;list-style:none}
+.menu li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding:22px 0;border-bottom:1px solid var(--line)}
+.menu h3{font-size:1.4rem}
+.menu p{grid-column:1;color:var(--muted);font-size:.97rem}
+.menu .price{grid-column:2;grid-row:1/3;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price small{display:block;font-size:.78rem;color:var(--muted)}
+.price b{font:500 1.25rem/1.3 var(--display)}
+.price i{display:block;font-style:normal;font-size:.82rem;color:var(--muted)}
+.note{margin-top:18px;font-size:.88rem;color:var(--muted)}
+
+/* passo a passo */
+.steps{background:var(--band);color:var(--on-band)}
+.steps .wrap{padding-block:72px}
+.steps .eyebrow{color:var(--g1)}
+.steps h2 em{color:var(--g1)}
+.steps ol{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:40px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;border-top:1px solid color-mix(in srgb,var(--on-band) 25%,transparent);padding-top:18px}
+.steps li::before{content:counter(s);font:400 2.4rem/1 var(--display);color:var(--g1);display:block;margin-bottom:12px}
+.steps h3{font-size:1.3rem;margin-bottom:8px}
+.steps li p{color:var(--on-band-muted);font-size:.96rem}
+
+/* a clínica */
+.about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center;padding-block:76px}
+.portrait{aspect-ratio:1/1;max-width:100%;border-radius:var(--r);position:relative;
+  background:radial-gradient(80% 80% at 70% 25%,var(--g2),transparent 60%),linear-gradient(200deg,var(--g1),var(--g3))}
+.portrait span{position:absolute;inset:auto 16px 14px auto;font:500 .72rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;opacity:.55}
+.about h2{margin-block:12px 18px}
+.about p+p{margin-top:14px}
+.about .txt p{color:var(--muted);max-width:36em}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.creds li{font-size:.86rem;font-weight:500;padding:8px 14px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);background:var(--surface)}
+
+/* depoimentos */
+.said .wrap{padding-block:8px 76px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.quotes figure{margin:0;background:var(--surface);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:16px}
+.quotes blockquote{margin:0;font:400 1.18rem/1.4 var(--display)}
+.quotes figcaption{margin-top:auto;font-size:.88rem;color:var(--muted)}
+.quotes figcaption b{color:var(--ink);font-weight:600}
+
+/* dúvidas */
+.faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;padding-block:0 76px}
+.faq h2{margin-top:12px}
+details{border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font:500 1.08rem/1.35 var(--body)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 1.5rem/1 var(--display);color:var(--accent);flex:none}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 20px;color:var(--muted);max-width:40em}
+
+/* contato */
+.contact{background:var(--soft)}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-block:72px}
+.contact h2{margin-block:12px 16px}
+.contact .lead{color:var(--muted);max-width:30em}
+.hours{width:100%;border-collapse:collapse;margin-top:26px;font-variant-numeric:tabular-nums}
+.hours td{padding:11px 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
+.hours td:last-child{text-align:right;font-weight:600}
+.place{background:var(--surface);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:18px}
+.map{aspect-ratio:16/10;max-width:100%;border-radius:12px;position:relative;overflow:hidden;background:var(--bg)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;left:54%;top:46%;width:20px;height:20px;border-radius:50% 50% 50% 0;background:var(--accent);transform:translate(-50%,-100%) rotate(-45deg);box-shadow:0 6px 12px -4px color-mix(in srgb,var(--ink) 50%,transparent)}
+.place address{font-style:normal;line-height:1.5}
+.place address b{font:500 1.25rem/1.3 var(--display);display:block}
+.place .btn{align-self:flex-start}
+
+footer .wrap{padding-block:28px 96px;display:flex;flex-wrap:wrap;gap:4px 24px;flex-direction:column;font-size:.86rem;color:var(--muted)}
+
+/* botão flutuante e aviso */
+.float{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:25;box-shadow:0 14px 30px -10px color-mix(in srgb,var(--accent) 70%,transparent)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);z-index:40;background:var(--band);color:var(--on-band);padding:14px 18px;border-radius:14px;font-size:.93rem;line-height:1.4;width:min(92vw,430px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+.hero .txt>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero .txt>*:nth-child(2){animation-delay:.05s}.hero .txt>*:nth-child(3){animation-delay:.1s}.hero .txt>*:nth-child(4){animation-delay:.15s}
+@keyframes float{50%{transform:translateY(-6px)}}
+.chip{animation:float 6s ease-in-out infinite}.chip-b{animation-delay:-3s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .top .btn{margin-left:auto}
+  .hero .wrap,.about .wrap,.faq .wrap,.contact .wrap{grid-template-columns:1fr;gap:36px}
+  .hero .wrap{padding-block:40px 56px}
+  .art{width:min(100%,340px)}
+  .chip-a{left:-8px}.chip-b{right:-8px}
+  .menu{grid-template-columns:1fr}
+  .steps ol{grid-template-columns:1fr 1fr}
+  .quotes{grid-template-columns:1fr}
+  .portrait{max-width:300px}
+  .float span{display:none}.float{padding:16px}
+  .float .wa{width:24px;height:24px}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .steps ol{grid-template-columns:1fr}
+  .logo small{display:none}
+  .top .btn span.long{display:none}
+  .menu li{grid-template-columns:1fr}
+  .menu .price{grid-column:1;grid-row:auto;text-align:left;display:flex;align-items:baseline;gap:8px;margin-top:6px}
+  .price small,.price i{display:inline}
+}
+</style>
+</head>
+<body>
+
+<div class="demo"><div class="wrap"><b>Modelo de demonstração.</b> Nome, textos, preços e depoimentos são exemplos; no seu site entram os dados reais da sua clínica.</div></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><!--LOGO-->Veredas <small>Odontologia</small><!--/LOGO--></a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#tratamentos">Tratamentos</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#clinica">A clínica</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="btn btn-main btn-sm" data-wa type="button"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3Z"/><path d="M9 8.6c-.2 3.2 3.2 6.6 6.4 6.4" /></svg>Agendar<span class="long">&nbsp;pelo WhatsApp</span></button>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero">
+  <div class="wrap">
+    <div class="txt">
+      <!--HERO-->
+      <p class="eyebrow">Odontologia para toda a família em Uberaba</p>
+      <h1>Um sorriso que você <em>não precisa esconder</em>.</h1>
+      <p class="lead">Do check-up ao implante, com explicação clara de cada etapa. Você sai da avaliação sabendo o que precisa fazer, em quanto tempo e quanto custa.</p>
+      <!--/HERO-->
+      <div class="cta">
+        <button class="btn btn-main" data-wa type="button">Agendar avaliação gratuita</button>
+        <a class="btn btn-ghost" href="#tratamentos">Ver tratamentos e preços</a>
+      </div>
+      <ul class="facts">
+        <li>Avaliação sem custo</li>
+        <li>Atendimento com hora marcada</li>
+        <li>Parcelamento em até 12x</li>
+      </ul>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="arch">
+        <span class="slot">Foto da sua<br>clínica aqui</span>
+        <svg viewBox="0 0 400 180" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M200 180V70"/><path d="M200 150c-30-6-52-26-60-56 30 4 52 24 60 56Z"/><path d="M200 150c30-6 52-26 60-56-30 4-52 24-60 56Z"/><path d="M200 112c-24-8-40-26-44-52 24 6 40 24 44 52Z"/><path d="M200 112c24-8 40-26 44-52-24 6-40 24-44 52Z"/><path d="M200 72c-10-12-12-28-4-46 12 14 14 30 4 46Z"/></svg>
+      </div>
+      <div class="chip chip-a"><span>Próximo horário livre</span><b>Hoje, 16h30</b></div>
+      <div class="chip chip-b"><span class="stars">★★★★★</span><b>4,9 no Google</b><span>259 avaliações</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="treat" id="tratamentos">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Tratamentos</p><h2>O que fazemos, <em>com preço à vista</em></h2></div>
+      <p>Toque em um tratamento para tirar dúvidas ou marcar. O plano final é definido na avaliação.</p>
+    </div>
+    <!--TREAT-->
+    <div class="tabs" role="group" aria-label="Filtrar tratamentos">
+      <button class="tab" type="button" data-f="todos" aria-pressed="true">Todos</button>
+      <button class="tab" type="button" data-f="prev" aria-pressed="false">Prevenção</button>
+      <button class="tab" type="button" data-f="est" aria-pressed="false">Estética</button>
+      <button class="tab" type="button" data-f="reab" aria-pressed="false">Reabilitação</button>
+    </div>
+    <ul class="menu">
+      <li data-c="prev"><h3>Limpeza e profilaxia</h3><p>Remoção de tártaro e placa, polimento e flúor. Indicada a cada seis meses.</p><div class="price"><small>a partir de</small><b>R$ 180</b><i>40 min</i></div></li>
+      <li data-c="prev"><h3>Restaurações</h3><p>Tratamento de cáries com resina da cor do dente, em uma consulta.</p><div class="price"><small>a partir de</small><b>R$ 150</b><i>por dente</i></div></li>
+      <li data-c="prev"><h3>Odontopediatria</h3><p>Consulta no ritmo da criança, com prevenção e orientação para os pais.</p><div class="price"><small>a partir de</small><b>R$ 160</b><i>40 min</i></div></li>
+      <li data-c="est"><h3>Clareamento dental</h3><p>No consultório, em casa ou combinado, com controle de sensibilidade.</p><div class="price"><small>a partir de</small><b>R$ 600</b><i>2 sessões</i></div></li>
+      <li data-c="est"><h3>Lentes de contato dental</h3><p>Corrigem cor, formato e pequenos espaços com desgaste mínimo.</p><div class="price"><small>a partir de</small><b>R$ 1.200</b><i>por dente</i></div></li>
+      <li data-c="est"><h3>Alinhadores invisíveis</h3><p>Alinham os dentes sem aparelho fixo, com placas trocadas em casa.</p><div class="price"><small>a partir de</small><b>R$ 390</b><i>por mês</i></div></li>
+      <li data-c="reab"><h3>Implante dentário</h3><p>Repõe o dente perdido com pino de titânio e coroa de porcelana.</p><div class="price"><small>a partir de</small><b>R$ 2.200</b><i>por implante</i></div></li>
+      <li data-c="reab"><h3>Tratamento de canal</h3><p>Feito com motor rotatório e anestesia, na maioria dos casos em sessão única.</p><div class="price"><small>a partir de</small><b>R$ 650</b><i>por dente</i></div></li>
+    </ul>
+    <!--/TREAT-->
+    <p class="note">Valores de exemplo. O orçamento final sai na avaliação.</p>
+  </div>
+</section>
+
+<section class="steps" id="como-funciona">
+  <div class="wrap">
+    <p class="eyebrow">Como funciona</p>
+    <h2 style="margin-top:12px">Da primeira conversa <em>ao resultado</em></h2>
+    <!--STEPS-->
+    <ol>
+      <li><h3>Avaliação gratuita</h3><p>Exame clínico completo e, se for preciso, radiografia. Explicamos o que encontramos com imagens.</p></li>
+      <li><h3>Plano por escrito</h3><p>Você recebe o que é urgente, o que pode esperar, o número de consultas e o valor total.</p></li>
+      <li><h3>Tratamento no seu horário</h3><p>Consultas com hora marcada, de segunda a sábado, sempre com a mesma dentista.</p></li>
+      <li><h3>Manutenção</h3><p>Retorno a cada seis meses, com lembrete pelo WhatsApp, para o resultado durar.</p></li>
+    </ol>
+    <!--/STEPS-->
+  </div>
+</section>
+
+<section class="about" id="clinica">
+  <div class="wrap">
+    <div class="portrait" aria-hidden="true"><span>Foto da profissional</span></div>
+    <div class="txt">
+      <!--ABOUT-->
+      <p class="eyebrow">A clínica</p>
+      <h2>Quem cuida de você é <em>sempre a mesma pessoa</em></h2>
+      <p>A Veredas foi criada pela Dra. Helena Prado, cirurgiã-dentista, para atender com calma: consulta que começa no horário e explicação sem pressa.</p>
+      <p>Trabalhamos com anestesia computadorizada, radiografia digital e materiais de marcas reconhecidas, e nenhum procedimento começa sem você entender o porquê.</p>
+      <ul class="creds">
+        <li>Cirurgiã-dentista · CRO-MG 00000</li>
+        <li>Especialista em implantodontia</li>
+        <li>12 anos de atendimento em Uberaba</li>
+      </ul>
+      <!--/ABOUT-->
+    </div>
+  </div>
+</section>
+
+<section class="said">
+  <div class="wrap">
+    <div class="head"><div><p class="eyebrow">Depoimentos</p><h2>O que os pacientes <em>contam</em></h2></div><p>Aqui entram as avaliações reais do seu Google.</p></div>
+    <!--QUOTES-->
+    <div class="quotes">
+      <figure><blockquote>“Tinha pavor de dentista. Fiz dois implantes sem sentir dor e entendendo cada passo.”</blockquote><figcaption><b>Paulo R.</b> · Implante dentário</figcaption></figure>
+      <figure><blockquote>“Meu filho de cinco anos agora pede para voltar. A paciência com criança é rara.”</blockquote><figcaption><b>Juliana M.</b> · Odontopediatria</figcaption></figure>
+      <figure><blockquote>“Orçamento claro, sem empurrar tratamento. O clareamento ficou natural.”</blockquote><figcaption><b>Fernanda C.</b> · Clareamento dental</figcaption></figure>
+    </div>
+    <!--/QUOTES-->
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div><p class="eyebrow">Dúvidas</p><h2>Perguntas que <em>todo mundo faz</em></h2></div>
+    <div>
+      <!--FAQ-->
+      <details open><summary>A avaliação é mesmo gratuita?</summary><p>Sim. Dura cerca de 30 minutos e você não precisa fechar nenhum tratamento para fazer.</p></details>
+      <details><summary>Tenho medo de dentista. Como vocês lidam com isso?</summary><p>Combinamos um sinal para parar a qualquer momento, usamos anestesia computadorizada e, se quiser, começamos pelo procedimento mais simples.</p></details>
+      <details><summary>Atendem convênio?</summary><p>Atendemos particular e emitimos nota e relatório para reembolso no seu plano.</p></details>
+      <details><summary>Quais são as formas de pagamento?</summary><p>Pix, débito e crédito em até 12 vezes nos tratamentos maiores.</p></details>
+      <!--/FAQ-->
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contato">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Contato</p>
+      <h2>Marque sua avaliação <em>em dois minutos</em></h2>
+      <p class="lead">Chame no WhatsApp, diga o que gostaria de tratar e escolha o melhor horário.</p>
+      <table class="hours">
+        <tr><td>Segunda a sexta</td><td>8h às 19h</td></tr>
+        <tr><td>Sábado</td><td>8h às 13h</td></tr>
+        <tr><td>Domingo e feriados</td><td>Fechado</td></tr>
+      </table>
+    </div>
+    <div class="place">
+      <div class="map" aria-hidden="true">
+        <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#D7E3E2" stroke-width="10" stroke-linecap="round"><path d="M-10 60 330 30M-10 130 330 110M-10 190 330 176M60-10 80 210M170-10 176 210M270-10 262 210"/><path stroke-width="4" d="M-10 95 330 72M120-10 128 210M222-10 220 210"/></svg>
+        <span class="pin"></span>
+      </div>
+      <address><b>Av. Exemplo, 1000 · sala 12</b>Bairro Exemplo, Uberaba · MG<br>(34) 90000-0000</address>
+      <button class="btn btn-main" data-wa type="button">Chamar no WhatsApp</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span><!--FOOT-->Veredas Odontologia<!--/FOOT--> · Uberaba, MG</span><span>Modelo de demonstração: clínica fictícia</span></div></footer>
+
+<button class="btn btn-main float" data-wa type="button" aria-label="Agendar pelo WhatsApp"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3Z"/><path d="M9 8.6c-.2 3.2 3.2 6.6 6.4 6.4" /></svg><span>Agendar</span></button>
+<div class="toast" id="toast" role="status">No seu site, este botão abre a conversa no WhatsApp da clínica, com a mensagem já escrita.</div>
+
+<script>
+(function(){
+  var toast=document.getElementById('toast'),t;
+  document.querySelectorAll('[data-wa]').forEach(function(b){
+    b.addEventListener('click',function(){toast.classList.add('on');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('on')},4200)});
+  });
+  var tabs=document.querySelectorAll('.tab'),items=document.querySelectorAll('.menu li');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var f=tab.dataset.f;
+      tabs.forEach(function(x){x.setAttribute('aria-pressed',x===tab?'true':'false')});
+      items.forEach(function(li){li.hidden=!(f==='todos'||li.dataset.c===f)});
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
